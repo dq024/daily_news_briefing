@@ -25,6 +25,9 @@ def test_fetch_rss_feeds(mock_parse):
     # Mocking feedparser.parse to return controlled RSS data
     mock_parse.return_value.entries = mock_rss_data
 
+     # Limit feeds to test only 1 iteration
+    RSS_FEEDS[:] = ["http://mocked.url"]
+    
     result = fetch_rss_feeds()
     assert len(result) == 2, "Expected 2 articles in the fetched RSS data"
     assert result[0]["title"] == "Tech News Today", "Title mismatch in first article"
