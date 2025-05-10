@@ -19,7 +19,7 @@ mock_rss_data = [
     }
 
 ]
-fetch_rss_feeds
+
 # Test case 1: Test  function
 @mock.patch("feedparser.parse")
 def test_fetch_rss_feeds(mock_parse):
