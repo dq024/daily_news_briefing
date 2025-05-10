@@ -1,5 +1,3 @@
-# news_parser.py
-
 import feedparser
 
 # Define the list of RSS feed URLs
@@ -72,11 +70,11 @@ RSS_FEEDS = [
 ]
 
 def fetch_rss_feeds():
+    """Fetch headlines from multiple RSS feeds and return them as a list."""
     feed_data = []
-
     for feed_url in RSS_FEEDS:
         feed = feedparser.parse(feed_url)
-        for entry in feed.entries[:5]:  # Limit to first 5 headlines per feed
+        for entry in feed.entries[:15]:  # Limit to 15 headlines per feed
             summary = entry.summary if hasattr(entry, 'summary') else "No summary available"
             title = entry.title
             link = entry.link
@@ -86,18 +84,20 @@ def fetch_rss_feeds():
                 "summary": summary,
                 "link": link
             })
-
     return feed_data
 
 def format_rss_for_email(rss_data):
+    """Format the fetched RSS data for email."""
     formatted_data = []
-
     for entry in rss_data:
         formatted_data.append(f"{entry['title']}\n{entry['summary']}\nRead more: {entry['link']}\n")
-
     return "\n".join(formatted_data)
 
-if __name__ == "__main__":
-    rss_data = fetch_rss_fe
-::contentReference[oaicite:135]{index=135}
- 
+# Update function names to match the previous script
+def fetch_and_summarize_rss():
+    """Fetch and summarize RSS feeds."""
+    print("Fetching and summarizing RSS feeds...")
+    feed_data = fetch_rss_feeds()
+    summarized_data = format_rss_for_email(feed_data)
+    print(f"Fetched {len(feed_data)} headlines.")
+    return summarized_data
