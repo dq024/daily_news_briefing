@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 import os
-from news_parser import fetch_and_summarize_rss
+from news_parser import fetch_rss_feeds
 
 # Load environment variables from .env file
 load_dotenv()
@@ -171,7 +171,7 @@ def send_email(subject, body):
 
 def main():
     print("Starting main process...")
-    rss_summary = fetch_and_summarize_rss()
+    rss_summary = fetch_rss_feeds()
     print("RSS summary fetched.")
     newsletter = generate_news_digest(rss_summary)
     send_email("GLOBAL BRIEFING", newsletter)
