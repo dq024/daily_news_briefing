@@ -2,3 +2,4 @@ openai
 feedparser==6.0.8
 flake8==3.9.2
 pytest==6.2.4
+python-dotenv
