@@ -1,4 +1,4 @@
-# news_digest.py
+# news_parser.py
 
 import feedparser
 
