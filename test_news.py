@@ -1,6 +1,7 @@
 import pytest
 from unittest import mock
-from news_digest import fetch_rss_feeds, generate_news_digest, send_email
+from news_digest import generate_news_digest, send_email
+import news_parser 
 import openai
 import smtplib
 
@@ -18,17 +19,25 @@ mock_rss_data = [
     }
 
 ]
-
-# Test case 1: Test fetch_rss_feeds function
+fetch_rss_feeds
+# Test case 1: Test  function
 @mock.patch("feedparser.parse")
 def test_fetch_rss_feeds(mock_parse):
     # Mocking feedparser.parse to return controlled RSS data
     mock_parse.return_value.entries = mock_rss_data
 
-     # Limit feeds to test only 1 iteration
-    RSS_FEEDS[:] = ["http://mocked.url"]
     
-    result = fetch_rss_feeds()
+    # Temporarily override RSS_FEEDS in the module where it's defined
+    original_feeds = news_parser.RSS_FEEDS
+    
+     # Limit feeds to test only 1 iteration
+    news_parser.RSS_FEEDS = ["http://mocked.url"]
+
+    result = news_parser.fetch_rss_feeds()
+
+    # Restore original RSS_FEEDS after test
+    news_parser.RSS_FEEDS = original_feeds
+    
     assert len(result) == 2, "Expected 2 articles in the fetched RSS data"
     assert result[0]["title"] == "Tech News Today", "Title mismatch in first article"
     assert result[1]["description"] == "Inflation rates are on the rise.", "Summary mismatch in second article"
