@@ -6,8 +6,17 @@ import smtplib
 
 # Mock RSS feed data
 mock_rss_data = [
-    {"title": "Tech News Today", "summary": "New breakthroughs in AI.", "link": "http://example.com/tech"},
-    {"title": "Global Economy Update", "summary": "Inflation rates are on the rise.", "link": "http://example.com/economy"},
+    {
+        'title': 'Tech News Today',
+        'summary': 'New breakthroughs in AI.',
+        'link': 'http://example.com/tech'
+    },
+    {
+        'title': 'Global Economy Update',
+        'summary': 'Inflation rates are on the rise.',
+        'link': 'http://example.com/economy'
+    }
+
 ]
 
 # Test case 1: Test fetch_rss_feeds function
@@ -26,8 +35,8 @@ def test_fetch_rss_feeds(mock_parse):
 @mock.patch("openai.ChatCompletion.create")
 def test_generate_news_digest(mock_openai):
     # Mocking OpenAI's API response
-    mock_openai.return_value.choices = [{"message": {"content": "Global Headlines:\n- Tech breakthrough... (source: example.com)"}}]
-
+    mock_openai.return_value.choices = [{'message': {'content': "Global Headlines:\n- Tech breakthrough... (source: example.com)"}
+}]
     # Mock RSS summary to feed into the digest function
     rss_summary = mock_rss_data
 
