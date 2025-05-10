@@ -75,22 +75,19 @@ def fetch_rss_feeds():
     for feed_url in RSS_FEEDS:
         feed = feedparser.parse(feed_url)
         for entry in feed.entries[:15]:  # Limit to 15 headlines per feed
-            summary = entry.summary if hasattr(entry, 'summary') else "No summary available"
-            title = entry.title
-            link = entry.link
-
-            feed_data.append({
-                "title": title,
-                "summary": summary,
-                "link": link
-            })
+            description = entry.get('description', 'No des. available')  # Use .get() for dictionary access
+            title = entry.get('title', 'No title available')  # Use .get() for dictionary access
+            link = entry.get('link', 'No link avail.')
+            
+            feed_data.append({'title': title, 'description': description, 'link': link})
+            
     return feed_data
 
 def format_rss_for_email(rss_data):
     """Format the fetched RSS data for email."""
     formatted_data = []
     for entry in rss_data:
-        formatted_data.append(f"{entry['title']}\n{entry['summary']}\nRead more: {entry['link']}\n")
+        formatted_data.append(f"{entry['title']}\n{entry['description']}\nRead more: {entry['link']}\n")
     return "\n".join(formatted_data)
 
 # Update function names to match the previous script
