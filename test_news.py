@@ -8,12 +8,12 @@ import smtplib
 mock_rss_data = [
     {
         'title': 'Tech News Today',
-        'summary': 'New breakthroughs in AI.',
+        'description': 'New breakthroughs in AI.',
         'link': 'http://example.com/tech'
     },
     {
         'title': 'Global Economy Update',
-        'summary': 'Inflation rates are on the rise.',
+        'description': 'Inflation rates are on the rise.',
         'link': 'http://example.com/economy'
     }
 
@@ -28,7 +28,7 @@ def test_fetch_rss_feeds(mock_parse):
     result = fetch_rss_feeds()
     assert len(result) == 2, "Expected 2 articles in the fetched RSS data"
     assert result[0]["title"] == "Tech News Today", "Title mismatch in first article"
-    assert result[1]["summary"] == "Inflation rates are on the rise.", "Summary mismatch in second article"
+    assert result[1]["description"] == "Inflation rates are on the rise.", "Summary mismatch in second article"
     assert result[0]["link"] == "http://example.com/tech", "Link mismatch in first article"
 
 # Test case 2: Test generate_news_digest function
