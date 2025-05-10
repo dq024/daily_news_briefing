@@ -6,11 +6,11 @@ import smtplib
 
 # Mock RSS feed data
 mock_rss_data = [
-    {
+    1: {
         'title': 'Tech News Today',
         'description': 'New breakthroughs in AI.',
         'link': 'http://example.com/tech'
-    },
+    }, 2: 
     {
         'title': 'Global Economy Update',
         'description': 'Inflation rates are on the rise.',
