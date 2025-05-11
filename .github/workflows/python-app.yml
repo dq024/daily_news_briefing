@@ -4,6 +4,7 @@
 name: Python application
 
 on:
+  workflow_dispatch:  # <-- this enables manual runs
   push:
     branches: [ "main" ]
   pull_request:
