@@ -45,16 +45,18 @@ def test_fetch_rss_feeds(mock_parse):
     assert result[0]["link"] == "http://example.com/tech", "Link mismatch in first article"
 
 # Test case 2: Test generate_news_digest function
-@mock.patch("openai.completions.create")
+@mock.patch("openai.OpenAI")
 @mock.patch.dict(os.environ, {"OPENAI_API_KEY": "your-api-key-here"})  # Mock the API key
-def test_generate_news_digest(mock_openai):
+def test_generate_news_digest(mock_client):
+
+    
     # Properly mock the OpenAI response structure
     mock_response = mock.MagicMock()
     mock_choice = mock.MagicMock()
     mock_choice.message.content = "Global Headlines:\n- Tech breakthrough... (source: example.com)"
     mock_response.choices = [mock_choice]
     
-    mock_openai.return_value = mock_response
+    mock_client.return_value.chat.completions.create.return_value = mock_response
     
     # Mock RSS summary to feed into the digest function
     rss_summary = mock_rss_data
