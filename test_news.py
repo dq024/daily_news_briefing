@@ -107,18 +107,29 @@ def test_main_process(mock_smtp, mock_openai, mock_parse):
     # Mock OpenAI client
     mock_client = mock.MagicMock()
     mock_openai.return_value = mock_client
+
+    # Create a mock OpenAI response with real string content
+    mock_response = mock.MagicMock()
+    mock_response.choices = [
+        type("Choice", (), {
+            "message": type("Message", (), {
+                "content": "Global Headlines:\n- Tech breakthrough... (source: example.com)"
+            })()
+        })()
+    ]
+    mock_client.return_value.chat.completions.create.return_value = mock_response
     
     # Create a mock response that supports dot notation
-    mock_message = mock.MagicMock()
-    mock_message.content = "Global Headlines:\n- Tech breakthrough... (source: example.com)"
+    #mock_message = mock.MagicMock()
+    #mock_message.content = "Global Headlines:\n- Tech breakthrough... (source: example.com)"
 
-    mock_choice = mock.MagicMock()
-    mock_choice.message = mock_message
+    #mock_choice = mock.MagicMock()
+    #mock_choice.message = mock_message
 
-    mock_response = mock.MagicMock()
-    mock_response.choices = [mock_choice]
+    #mock_response = mock.MagicMock()
+    #mock_response.choices = [mock_choice]
 
-    mock_client.return_value.chat.completions.create.return_value = mock_response
+    #mock_client.return_value.chat.completions.create.return_value = mock_response
       
     # Mock SMTP server
     mock_server = mock.MagicMock()
