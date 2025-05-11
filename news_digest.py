@@ -12,11 +12,7 @@ load_dotenv()
 
 # Set up API and email credentials from environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-SMTP_SERVER = os.getenv("SMTP_SERVER")
-SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
-EMAIL_FROM = os.getenv("EMAIL_FROM")
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
-EMAIL_TO = os.getenv("EMAIL_TO")
+
 
 # Set OpenAI API key
 openai.api_key = OPENAI_API_KEY
@@ -150,6 +146,13 @@ Text:
 # Function to send the news digest as an email
 def send_email(subject, body):
     print("Preparing to send email...")
+
+    # Retrieve variables. 
+    SMTP_SERVER = os.getenv("SMTP_SERVER")
+    SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+    EMAIL_FROM = os.getenv("EMAIL_FROM")
+    SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+    EMAIL_TO = os.getenv("EMAIL_TO")
     
     if not EMAIL_FROM or not SMTP_PASSWORD:
         raise ValueError("Missing email or password.")
