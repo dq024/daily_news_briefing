@@ -1,6 +1,6 @@
 # news_digest.py
 
-import openai
+from openai import OpenAI
 import smtplib
 from email.message import EmailMessage
 from dotenv import load_dotenv
@@ -15,7 +15,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 # Set OpenAI API key
-openai.api_key = OPENAI_API_KEY
+client = OpenAI(api_key=os.environ[OPENAI_API_KEY])
 
 # Function to generate a news digest from RSS summaries using OpenAI
 def generate_news_digest(rss_summary):
@@ -131,12 +131,11 @@ Text:
 {rss_summary}
 """
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4.1-mini",
         messages=[
             {"role": "system", "content": "You are a world-class news summarizer."},
-            {"role": "user", "content": prompt},
-        ],
+            {"role": "user", "content": prompt},],
         temperature=0.3,
     )
 
@@ -144,7 +143,7 @@ Text:
 
     print(response)  # Print out the response to check its structure
     
-    return response.choices[0]["message"]["content"]
+    return response.choices[0].message.content
 
 # Function to send the news digest as an email
 def send_email(subject, body):
