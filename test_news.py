@@ -46,9 +46,15 @@ def test_fetch_rss_feeds(mock_parse):
 # Test case 2: Test generate_news_digest function
 @mock.patch("openai.ChatCompletion.create")
 def test_generate_news_digest(mock_openai):
-    # Mocking OpenAI's API response
-    mock_openai.return_value.choices = [{'message': {'content': "Global Headlines:\n- Tech breakthrough... (source: example.com)"}
-}]
+    # Properly mock the OpenAI response structure
+    mock_choice = mock.MagicMock()
+    mock_choice.message.content = "Global Headlines:\n- Tech breakthrough... (source: example.com)"
+    
+    mock_response = mock.MagicMock()
+    mock_response.choices = [mock_choice]
+    
+    mock_openai.return_value = mock_response
+    
     # Mock RSS summary to feed into the digest function
     rss_summary = mock_rss_data
 
