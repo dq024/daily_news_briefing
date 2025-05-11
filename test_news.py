@@ -65,6 +65,13 @@ def test_generate_news_digest(mock_openai):
 
 # Test case 3: Test send_email function
 @mock.patch("smtplib.SMTP")
+@mock.patch.dict(os.environ, {
+    "EMAIL_FROM": "your-email@example.com",
+    "SMTP_PASSWORD": "your-password",
+    "EMAIL_TO": "recipient@example.com",
+    "SMTP_SERVER": "smtp.example.com",
+    "SMTP_PORT": "587",
+})
 def test_send_email(mock_smtp):
     # Mocking the SMTP connection and send_message
     mock_server = mock.MagicMock()
