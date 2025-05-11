@@ -80,6 +80,11 @@ def test_send_email(mock_smtp):
 
     subject = "Test Email"
     body = "This is a test email body."
+
+    # Print the environment variables to ensure they're set correctly
+    print(f"EMAIL_FROM: {os.environ['EMAIL_FROM']}")
+    print(f"SMTP_PASSWORD: {os.environ['SMTP_PASSWORD']}")
+    
     send_email(subject, body)
 
     mock_server.starttls.assert_called_once(), "starttls was not called"
