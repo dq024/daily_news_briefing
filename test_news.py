@@ -46,6 +46,7 @@ def test_fetch_rss_feeds(mock_parse):
 
 # Test case 2: Test generate_news_digest function
 @mock.patch("news_digest.client.chat.completions.create")
+@mock.patch.dict(os.environ, {"OPENAI_API_KEY": "your-api-key-here"})  # Mock the API key
 def test_generate_news_digest(mock_openai):
     # Properly mock the OpenAI response structure
     mock_response = mock.MagicMock()
