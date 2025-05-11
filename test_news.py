@@ -49,7 +49,7 @@ def test_fetch_rss_feeds(mock_parse):
 def test_generate_news_digest(mock_openai):
     # Properly mock the OpenAI response structure
     mock_choice = mock.MagicMock()
-    mock_choice.message.content = "Global Headlines:\n- Tech breakthrough... (source: example.com)"
+    mock_choice.message = {"content": "Global Headlines:\n- Tech breakthrough... (source: example.com)"}
     
     mock_response = mock.MagicMock()
     mock_response.choices = [mock_choice]
