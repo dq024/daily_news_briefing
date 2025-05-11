@@ -154,7 +154,7 @@ def send_email(subject, body):
     if not EMAIL_FROM or not SMTP_PASSWORD:
         raise ValueError("Missing email or password.")
 
-    msg = EmailMEssage()
+    msg = EmailMessage()
     msg.set_content(body)
     msg["From"] = EMAIL_FROM 
     msg["To"] = EMAIL_TO
