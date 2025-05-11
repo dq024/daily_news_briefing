@@ -1,0 +1,26 @@
+name: Migrate OpenAI API
+
+on:
+  workflow_dispatch:  # Allows you to trigger this manually
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install openai grit
+
+    - name: Run OpenAI Migration
+      run: |
+        openai migrate  # This runs the migration to update your code to the new OpenAI API version
