@@ -103,7 +103,7 @@ def test_main_process(mock_smtp, mock_openai, mock_parse):
     
     # Mock SMTP server
     mock_server = mock.MagicMock()
-    mock_smtp.return_value = mock_server
+    mock_smtp.return_value.__enter__.return_value = mock_server
 
     # Execute the main function
     from news_digest import main
