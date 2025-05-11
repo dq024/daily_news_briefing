@@ -68,7 +68,7 @@ def test_generate_news_digest(mock_openai):
 def test_send_email(mock_smtp):
     # Mocking the SMTP connection and send_message
     mock_server = mock.MagicMock()
-    mock_smtp.return_value = mock_server
+    mock_smtp.return_value.__enter__.return_value = mock_server
 
     subject = "Test Email"
     body = "This is a test email body."
