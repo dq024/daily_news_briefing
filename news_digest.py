@@ -125,11 +125,11 @@ Text:
 {rss_summary}
 """
     
-# Set up API and email credentials from environment variables
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    # Set up API and email credentials from environment variables
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# Set OpenAI API key
-client = OpenAI(api_key=os.environ[OPENAI_API_KEY])
+    # Set OpenAI API key
+    client = OpenAI(api_key=OPENAI_API_KEY)
 
     
     response = client.chat.completions.create(
