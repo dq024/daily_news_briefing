@@ -83,10 +83,11 @@ def test_send_email(mock_smtp):
     send_email(subject, body)
 
     mock_server.starttls.assert_called_once(), "starttls was not called"
-    mock_server.login.assert_called_once_with("your-email@example.com", "your-password"), "Login was not called with correct credentials"
+    mock_server.login.assert_called_once_with(os.environ["EMAIL_FROM"],
+        os.environ["SMTP_PASSWORD"]), "Login was not called with correct credentials"
     mock_server.send_message.assert_called_once(), "send_message was not called"
     assert mock_server.send_message.call_args[0][0]["Subject"] == subject, "Email subject does not match"
-    assert mock_server.send_message.call_args[0][0].get_payload() == body, "Email body does not match"
+    assert mock_server.send_message.call_args[0][0].get_content().strip() == body.strip(), "Email body does not match"
 
 # Test case 4: Test the full process from fetching to sending email
 @mock.patch("feedparser.parse")
