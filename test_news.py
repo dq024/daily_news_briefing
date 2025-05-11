@@ -4,6 +4,7 @@ from news_digest import generate_news_digest, send_email
 import news_parser 
 import openai
 import smtplib
+import os
 
 # Mock RSS feed data
 mock_rss_data = [
