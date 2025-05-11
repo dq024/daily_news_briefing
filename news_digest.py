@@ -10,12 +10,6 @@ from news_parser import fetch_rss_feeds
 # Load environment variables from .env file
 load_dotenv()
 
-# Set up API and email credentials from environment variables
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-
-# Set OpenAI API key
-client = OpenAI(api_key=os.environ[OPENAI_API_KEY])
 
 # Function to generate a news digest from RSS summaries using OpenAI
 def generate_news_digest(rss_summary):
@@ -130,7 +124,14 @@ X agrees to pay $10 million to settle Trump lawsuit. Wall Street Journal reports
 Text:
 {rss_summary}
 """
+    
+# Set up API and email credentials from environment variables
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+# Set OpenAI API key
+client = OpenAI(api_key=os.environ[OPENAI_API_KEY])
+
+    
     response = client.chat.completions.create(
         model="gpt-4.1-mini",
         messages=[
