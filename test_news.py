@@ -106,9 +106,9 @@ def test_main_process(mock_smtp, mock_openai, mock_parse):
 
     mock_client = mock.MagicMock()
     mock_openai.return_value = mock_client
-    mock_client.chat.completions.create.return_value.choices = [
+    mock_client.return_value.chat.completions.create.return_value = {'choices': [
         {"message": {"content": "Global Headlines:\n- Tech breakthrough... (source: example.com)"}}
-    ]  
+    ] } 
     
     # Mock SMTP server
     mock_server = mock.MagicMock()
