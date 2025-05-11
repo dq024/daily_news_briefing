@@ -98,12 +98,17 @@ def test_send_email(mock_smtp):
 
 # Test case 4: Test the full process from fetching to sending email
 @mock.patch("feedparser.parse")
-@mock.patch("openai.ChatCompletion.create")
+@mock.patch("news_digest.OpenAI")
 @mock.patch("smtplib.SMTP")
 def test_main_process(mock_smtp, mock_openai, mock_parse):
     # Mocking all components
     mock_parse.return_value.entries = mock_rss_data
-    mock_openai.return_value.choices = [{"message": {"content": "Global Headlines:\n- Tech breakthrough... (source: example.com)"}}]
+
+    mock_client = mock.MagicMock()
+    mock_openai.return_value = mock_client
+    mock_client.chat.completions.create.return_value.choices = [
+        {"message": {"content": "Global Headlines:\n- Tech breakthrough... (source: example.com)"}}
+    ]  
     
     # Mock SMTP server
     mock_server = mock.MagicMock()
