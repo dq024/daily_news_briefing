@@ -2,8 +2,7 @@
 
 import openai
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from email.message import EmailMessage
 from dotenv import load_dotenv
 import os
 from news_parser import fetch_rss_feeds
@@ -13,11 +12,11 @@ load_dotenv()
 
 # Set up API and email credentials from environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
-EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
-RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")
+SMTP_SERVER = os.getenv("SMTP_SERVER")
+SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+EMAIL_FROM = os.getenv("EMAIL_FROM")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+EMAIL_TO = os.getenv("EMAIL_TO")
 
 # Set OpenAI API key
 openai.api_key = OPENAI_API_KEY
@@ -151,18 +150,26 @@ Text:
 # Function to send the news digest as an email
 def send_email(subject, body):
     print("Preparing to send email...")
-    msg = MIMEMultipart()
-    msg["From"] = EMAIL_ADDRESS
-    msg["To"] = RECIPIENT_EMAIL
+    
+    if not EMAIL_FROM or not SMTP_PASSWORD:
+        raise ValueError("Missing email or password.")
+
+    msg = EmailMEssage()
+    msg.set_content(body)
+    msg["From"] = EMAIL_FROM 
+    msg["To"] = EMAIL_TO
     msg["Subject"] = subject
 
-    msg.attach(MIMEText(body, "plain"))
-
-    with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
-        server.starttls()
-        server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        server.send_message(msg)
-    print("Email sent successfully.")
+    try:
+            # Establish connection to SMTP server
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()  # Secure the connection using TLS
+            server.login(EMAIL_FROM, SMTP_PASSWORD)
+            server.send_message(msg)
+            print("Email sent successfully.")
+        
+    except Exception as e:
+        print(f"Failed to send email: {e}")
 
 # Main function to coordinate the workflow
 # 1. Fetch RSS feeds and summarize
@@ -174,7 +181,7 @@ def main():
     rss_summary = fetch_rss_feeds()
     print("RSS summary fetched.")
     newsletter = generate_news_digest(rss_summary)
-    send_email("GLOBAL BRIEFING", newsletter)
+    send_email("DAILY NEWS BRIEFING", newsletter)
     print("Process completed.")
 
 if __name__ == "__main__":
