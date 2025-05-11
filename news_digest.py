@@ -144,7 +144,7 @@ Text:
 
     print(response)  # Print out the response to check its structure
     
-    return response.choices[0].message["content"]
+    return response.choices[0]["message"]["content"]
 
 # Function to send the news digest as an email
 def send_email(subject, body):
