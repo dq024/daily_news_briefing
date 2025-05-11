@@ -141,7 +141,7 @@ Text:
     )
 
     print("News digest generated successfully.")
-    return response.choices[0].message.content
+    return response.choices[0].message["content"]
 
 # Function to send the news digest as an email
 def send_email(subject, body):
