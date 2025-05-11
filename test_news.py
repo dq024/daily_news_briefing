@@ -110,7 +110,7 @@ def test_main_process(mock_smtp, mock_openai, mock_parse):
     main()
 
     # Check if all parts were called correctly
-    assert mock_parse.call_count>0, 
+    assert mock_parse.call_count>0, "Expected feedparser.parse to be called at least once"
     mock_openai.assert_called_once()
     mock_server.send_message.assert_called_once()
 
