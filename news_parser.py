@@ -11,6 +11,7 @@ RSS_FEEDS = [
     "https://feeds.a.dj.com/rss/WSJcomOpinion.xml",
 
     # Reuters
+    "https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen",
     "http://feeds.reuters.com/Reuters/worldNews",
     "http://feeds.reuters.com/reuters/businessNews",
     "http://feeds.reuters.com/Reuters/PoliticsNews",
@@ -25,9 +26,14 @@ RSS_FEEDS = [
     "https://www.ft.com/opinion?format=rss",
 
     # Bloomberg
-    "https://www.bloomberg.com/feed/podcast/advantage.xml",
-    "https://www.bloomberg.com/feed/podcast/view.xml",
-    "https://www.bloomberg.com/feed/podcast/featured.xml",
+    "https://feeds.bloomberg.com/industries/news.rss",
+    "https://feeds.bloomberg.com/markets/news.rss",
+    "https://feeds.bloomberg.com/politics/news.rss",
+    "https://feeds.bloomberg.com/technology/news.rss",
+    "https://feeds.bloomberg.com/wealth/news.rss",
+    "https://feeds.bloomberg.com/green/news.rss",
+    "https://feeds.bloomberg.com/economics/news.rss",
+    "https://feeds.bloomberg.com/industries/news.rss",
 
     # The New York Times
     "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
