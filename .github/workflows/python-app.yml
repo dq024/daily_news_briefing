@@ -1,6 +1,8 @@
 name: Python application
 
 on:
+  schedule:
+    - cron: '0 4 * * *'  # <-- Daily at 07:00 UTC
   workflow_dispatch:  # <-- enables manual trigger
   push:
     branches: [ "main" ]
