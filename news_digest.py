@@ -18,15 +18,15 @@ def generate_news_digest(rss_summary):
 You are my personal news assistant. Turn these headlines into a structured morning newsletter with the following sections:
 
 GLOBAL HEADLINES
-GEOPOLITICS (subsections for North America, Middle East, Asia-Pacific, Europe, Africa)
+GEOPOLITICS (subsections in this order: Ukraine/Russia, North America, Asia-Pacific, Europe, Middle East, Africa)
 WORLD ECONOMY (subsections for Trade, Markets/Indicators, Policy)
 COMPANIES
 
 Format:
 - Use the structure and subcategories above. If subsections don't make sense based on provided news, you may adjust those.
-- Pick the most important 5 headlines to pull up in the Global Headlines sections. 
+- Pick the most important 5 headlines to pull up in the Global Headlines sections. Most commonly mentioned news across different sources and those positioned first are more likely to be Global Headlines.
 - Max 2 sentences per bullet.
-- Always include a source link at the end of each summary, in form of a hyperlink with the label being the source name (e.g., WSJ)
+- At the end of each summary, always include a source link hyperlinked to the respective source label (e.g., hyperlink the source link in "WSJ" if it is from the WSJ)
 - Prioritise WSJ (Wall Street Journal) as the first source link behind each summary, when available.
 - Use only the rss-summary provided below as input for news.
 - Refer to this example and follow its tone, style and structure (but ignore the actual news):
@@ -121,7 +121,7 @@ X agrees to pay $10 million to settle Trump lawsuit. Wall Street Journal reports
 
 
 
-Text:
+Text / RSS Summary to be used as news input:
 {rss_summary}
 """
     
