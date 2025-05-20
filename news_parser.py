@@ -63,7 +63,7 @@ RSS_FEEDS = [
     "http://rss.cnn.com/rss/cnn_tech.rss",
 
     # TechMeme
-    "https://www.techmeme.com/feed.xml"
+    "https://www.techmeme.com/feed.xml",
 
     # Al Jazeera
     "https://www.aljazeera.com/xml/rss/all.xml",
