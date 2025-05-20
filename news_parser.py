@@ -62,11 +62,8 @@ RSS_FEEDS = [
     "http://rss.cnn.com/rss/money_latest.rss",
     "http://rss.cnn.com/rss/cnn_tech.rss",
 
-    # The Guardian
-    "https://www.theguardian.com/world/rss",
-    "https://www.theguardian.com/business/rss",
-    "https://www.theguardian.com/technology/rss",
-    "https://www.theguardian.com/commentisfree/rss",
+    # TechMeme
+    "https://www.techmeme.com/feed.xml"
 
     # Al Jazeera
     "https://www.aljazeera.com/xml/rss/all.xml",
